@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <script src="~/Scripts/jquery-2.1.0.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/knockout-3.1.0.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+
+    <style>
+        body {
+            padding-top: 10px;
+        }
+
+        .popover {
+            margin-top: 100px !important;
+            height: 400px !important;
+            max-width: 700px !important;
+            overflow: scroll;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({
+                trigger: 'click',
+                'placement': 'right',
+                'show': true,
+            });
+            $(document).on('click', function (e) {
+                $('[data-toggle="popover"],[data-original-title]').each(function () {
+                    //the 'is' for buttons that trigger popups
+                    //the 'has' for icons within a button that triggers a popup
+                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                        (($(this).popover('hide').data('bs.popover') || {}).inState || {}).click = false  // fix for BS 3.3.6
+                    }
+
+                });
+            });
+        });
+    </script>
+    @RenderSection("Scripts", false)
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

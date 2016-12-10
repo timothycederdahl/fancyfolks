@@ -1,0 +1,21 @@
+﻿
+@model IEnumerable<FancyFolks.Models.FancyFolk>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Fancy Folks
+    </div>
+    <table class="table table-striped">
+        <tr><th>First Name</th><th>Last Name</th><th>Birth Place</th><th>Bio</th></tr>
+        @foreach (var f in Model)
+        {
+            <tr>
+                <td>@f.FirstName</td>
+                <td>@f.LastName</td>
+                <td>@f.BirthLocation</td>
+                <td><a href="javascript:void(0);" class="btn" data-toggle="popover" data-original-title="@f.Bio" data-html="true">@Html.Raw(@f.Bio.ToString().Substring(0, 120)) Click to see more...</a></td>
+            </tr>
+        }
+    </table>
+
+
